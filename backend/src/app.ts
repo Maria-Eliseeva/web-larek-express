@@ -7,7 +7,7 @@ import { errors } from 'celebrate';
 import productRoutes from './routes/product';
 import orderRoutes from './routes/order';
 
-import { errorHandler } from './middlewares/errorHandler';
+import errorHandler from './middlewares/errorHandler';
 import { requestLogger, errorLogger } from './middlewares/logger';
 import NotFoundError from './errors/not-found-error';
 
@@ -20,16 +20,15 @@ mongoose.connect(config.DB_ADDRESS);
 app.use(
   cors({
     origin: config.ORIGIN_ALLOW,
-  })
+  }),
 );
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(requestLogger);
-console.log(path.join(__dirname, '../public'));
+
 // роуты
 app.use('/product', productRoutes);
 app.use('/order', orderRoutes);
-
 
 app.use(errors());
 app.use('*', (req, res, next) => {
