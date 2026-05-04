@@ -24,6 +24,7 @@
     "eslint-plugin-import": "^2.29.1",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
+    "validator": "^13.11.0",
     "typescript": "^5.4.5"
   },
   "dependencies": {
@@ -35,7 +36,6 @@
     "express-winston": "^4.2.0",
     "joi": "^17.13.3",
     "mongoose": "^8.3.2",
-    "validator": "^13.11.0",
     "winston": "^3.19.0"
   }
 }

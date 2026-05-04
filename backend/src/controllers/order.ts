@@ -5,12 +5,12 @@ const createOrder = (req: Request, res: Response, next: NextFunction) => {
   try {
     const uuid = faker.string.uuid();
 
-    res.status(200).json({
+    return res.status(200).json({
       id: uuid,
       total: req.body.total,
     });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 

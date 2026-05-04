@@ -9,10 +9,9 @@ const errorHandler = (err: Error, _req: Request, res: Response) => {
     || err instanceof ConflictError
     || err instanceof NotFoundError
   ) {
-    res.status(err.statusCode).json({ message: err.message });
-  } else {
-    res.status(500).json({ message: 'Внутренняя ошибка сервера' });
+    return res.status(err.statusCode).json({ message: err.message });
   }
+  return res.status(500).json({ message: 'Внутренняя ошибка сервера' });
 };
 
 export default errorHandler;

@@ -18,24 +18,25 @@ const validateOrderBusiness = async (
         (id: string) => !foundIds.includes(id.toString()),
       );
 
-      next(new BadRequestError(`Товар с id ${missingIds[0]} не найден`));
-    } else if (products.find((p) => p.price === null)) {
+      return next(new BadRequestError(`Товар с id ${missingIds[0]} не найден`));
+    }
+
+    if (products.find((p) => p.price === null)) {
       const productWithNullPrice = products.find((p) => p.price === null);
 
-      next(
+      return next(
         new BadRequestError(
           `Товара "${productWithNullPrice!.title}" нет в наличии`,
         ),
       );
-    } else if (
-      products.reduce((sum, p) => sum + (p.price ?? 0), 0) !== total
-    ) {
-      next(new BadRequestError('Некорректная сумма заказа'));
-    } else {
-      next();
     }
+
+    if (products.reduce((sum, p) => sum + (p.price ?? 0), 0) !== total) {
+      return next(new BadRequestError('Некорректная сумма заказа'));
+    }
+    return next();
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
