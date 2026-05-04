@@ -23,9 +23,9 @@ app.use(
   })
 );
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 app.use(requestLogger);
-
+console.log(path.join(__dirname, '../public'));
 // роуты
 app.use('/product', productRoutes);
 app.use('/order', orderRoutes);
