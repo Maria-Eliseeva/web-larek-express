@@ -11,11 +11,11 @@ export const createProduct = (req: Request, res: Response, next: NextFunction) =
   }).catch((error) => {
     if (error instanceof MongooseError.ValidationError) {
       next(new BadRequestError('Validation failed'));
-    }
-    if (error instanceof Error && error.message.includes('E11000')) {
+    } else if (error instanceof Error && error.message.includes('E11000')) {
       next(new ConflictError('Товар с таким заголовком уже существует'));
+    } else {
+      next(error);
     }
-    next(error);
   });
 };
 
